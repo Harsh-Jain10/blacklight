@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { getConnection } = require('./db');
+require("dotenv").config
 
 const app = express();
 app.use(bodyParser.json());
@@ -57,7 +58,7 @@ app.get('/lastWeek/:country', async (req, res) => {
             [lastWeekStart, lastWeekEnd, country]
         );
         res.json(rows);
-    } catch (err) {
+    } catch (err){
         console.error(err);
         res.status(500).send('Error retrieving leaderboard');
     }
@@ -85,7 +86,7 @@ app.get('/rank/:userId', async (req, res) => {
     }
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
     console.log('Server listening on port 3000');
 });
 
